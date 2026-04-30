@@ -1,10 +1,19 @@
 "use client"
 
 import { Badge } from "@/components/ui/badge"
-import { ExternalLink, Globe, Smartphone, ShieldCheck, Link, Brain } from "lucide-react"
+import { ExternalLink, Globe, Smartphone, ShieldCheck, Link, Brain, BookOpen } from "lucide-react"
 import { AnimatedSection, AnimatedItem } from "./animated-section"
 
 const projects = [
+  {
+    title: "Tutorial: Next.js con IA",
+    type: "Tutorial / Guía Educativa",
+    description: "Guía paso a paso para configurar un proyecto Next.js moderno e integrar capacidades de Inteligencia Artificial con el Vercel AI SDK, incluyendo chat en tiempo real con streaming.",
+    tags: ["Next.js", "Vercel AI SDK", "TypeScript", "Streaming", "API Routes"],
+    icon: BookOpen,
+    image: "/Gemini_Generated_Image_a6iamfa6iamfa6ia.png",
+    link: "https://github.com/mnavarro77/next-ai-chatbot-starter",
+  },
   {
     title: "Legacy Vault PoC",
     type: "Protocolo Web3 / Smart Contract",
