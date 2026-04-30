@@ -33,9 +33,9 @@ const projects = [
     link: "https://github.com/mnavarro77/satoshi-data-agent.git",
   },
   {
-    title: "Acortador de Enlaces Pro",
+    title: "Snipio: Link Management & Analytics Infrastructure",
     type: "Aplicación Web Full Stack",
-    description: "Plataforma para acortar URLs con analíticas avanzadas, geolocalización y tracking de dispositivos. Diseñado con una interfaz premium en modo oscuro y glassmorphism.",
+    description: "Arquitectura escalable para el procesamiento y redirección de URLs con motor de analíticas en tiempo real, geolocalización avanzada y fingerprinting de dispositivos.",
     tags: ["Next.js", "React 19", "Prisma", "PostgreSQL", "Tailwind CSS"],
     icon: Link,
     image: "/acortador.png",
