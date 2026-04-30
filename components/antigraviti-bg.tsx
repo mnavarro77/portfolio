@@ -5,10 +5,12 @@ import { useEffect, useRef } from "react"
 interface Star {
   x: number
   y: number
-  radius: number
+  size: number
   opacity: number
   speedX: number
   speedY: number
+  char: string
+  glows: boolean
 }
 
 export function AntigravitiBg() {
@@ -45,16 +47,20 @@ export function AntigravitiBg() {
     // Extremely subtle stardust: few particles, very small, low opacity
     const starCount = Math.floor((width * height) / 8000) 
 
+    const codeChars = ['{', '}', '<', '>', '/', ';', '=', '(', ')', '[', ']', '#', '*', '&', '|', '::', '=>', '!=', '&&', '//', '++', '--', '**', '<?', '/>']
+
     const initStars = () => {
       stars.length = 0
       for (let i = 0; i < starCount; i++) {
         stars.push({
           x: Math.random() * width,
           y: Math.random() * height,
-          radius: Math.random() * 1.2 + 0.2, // 0.2 to 1.4px
-          opacity: Math.random() * 0.4 + 0.1, // 0.1 to 0.5 opacity
+          size: Math.random() * 10 + 6,
+          opacity: Math.random() * 0.25 + 0.05,
           speedX: (Math.random() - 0.5) * 0.1,
           speedY: (Math.random() - 0.5) * 0.1,
+          char: codeChars[Math.floor(Math.random() * codeChars.length)],
+          glows: Math.random() < 0.15, // ~15% of chars glow
         })
       }
     }
@@ -88,16 +94,24 @@ export function AntigravitiBg() {
         if (star.y > height + 10) star.y = -10
 
         // Calculate final position with parallax offset
-        // Parallax is negative (moves opposite to mouse)
-        // Multiply by star.radius so bigger stars move slightly faster (depth effect)
-        const parallaxFactor = star.radius * 0.5
+        const parallaxFactor = star.size * 0.03
         const finalX = star.x - (offsetX * parallaxFactor)
         const finalY = star.y - (offsetY * parallaxFactor)
 
-        ctx.beginPath()
-        ctx.arc(finalX, finalY, star.radius, 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(160, 160, 180, ${star.opacity})` // Soft cool gray / stardust
-        ctx.fill()
+        ctx.font = `${star.size}px 'Geist Mono', monospace`
+
+        if (star.glows) {
+          const pulse = Math.sin(Date.now() * 0.002 + star.x) * 0.15 + 0.85
+          const glowOpacity = Math.min(star.opacity * 2.5 * pulse, 0.6)
+          ctx.shadowColor = 'rgba(180, 190, 255, 0.8)'
+          ctx.shadowBlur = 12
+          ctx.fillStyle = `rgba(200, 210, 255, ${glowOpacity})`
+        } else {
+          ctx.shadowBlur = 0
+          ctx.fillStyle = `rgba(160, 160, 180, ${star.opacity})`
+        }
+
+        ctx.fillText(star.char, finalX, finalY)
       })
 
       animationFrameId = requestAnimationFrame(render)
