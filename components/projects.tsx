@@ -1,7 +1,8 @@
 "use client"
 
 import { Badge } from "@/components/ui/badge"
-import { ExternalLink, Globe, Smartphone, ShieldCheck, Link, Brain, BookOpen } from "lucide-react"
+import { ExternalLink, Globe, Smartphone, ShieldCheck, Link as LinkIcon, Brain, BookOpen } from "lucide-react"
+import Link from "next/link"
 import { AnimatedSection, AnimatedItem } from "./animated-section"
 
 const projects = [
@@ -31,13 +32,14 @@ const projects = [
     icon: Brain,
     image: "/datamind_final.png",
     link: "https://github.com/mnavarro77/satoshi-data-agent.git",
+    detailsLink: "/projects/satoshi",
   },
   {
     title: "Snipio: Infraestructura de Gestión de Enlaces y Analíticas",
     type: "Aplicación Web Full Stack",
     description: "Arquitectura escalable para el procesamiento y redirección de URLs con motor de analíticas en tiempo real, geolocalización avanzada y fingerprinting de dispositivos.",
     tags: ["Next.js", "React 19", "Prisma", "PostgreSQL", "Tailwind CSS"],
-    icon: Link,
+    icon: LinkIcon,
     image: "/acortador.png",
     link: "https://snipio-lac.vercel.app/",
   },
@@ -104,12 +106,27 @@ export function Projects() {
                     {project.description}
                   </p>
 
-                  <div className="flex flex-wrap gap-2">
-                    {project.tags.map((tag) => (
-                      <Badge key={tag} variant="outline" className="text-xs border-border text-muted-foreground">
-                        {tag}
-                      </Badge>
-                    ))}
+                  <div className="flex items-center gap-4 mt-4">
+                    {project.link && (
+                      <a
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1"
+                      >
+                        <Globe className="w-3 h-3" />
+                        Código / Demo
+                      </a>
+                    )}
+                    {"detailsLink" in project && project.detailsLink && (
+                      <Link
+                        href={project.detailsLink}
+                        className="text-xs text-primary hover:text-primary/80 transition-colors flex items-center gap-1 font-medium"
+                      >
+                        <BookOpen className="w-3 h-3" />
+                        Ver detalle
+                      </Link>
+                    )}
                   </div>
                 </div>
               </div>
