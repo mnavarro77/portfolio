@@ -7,6 +7,15 @@ import { AnimatedSection, AnimatedItem } from "./animated-section"
 
 const projects = [
   {
+    title: "Flujo de Trabajo en Git",
+    type: "Documentación / Guía",
+    description: "Normas y procedimientos para la gestión de versiones utilizando Git Flow simplificado y Conventional Commits para mantener un historial limpio y trazable.",
+    tags: ["Git", "Git Flow", "Conventional Commits"],
+    icon: BookOpen,
+    image: "/Gemini_Generated_Image_2vt83p2vt83p2vt8.png",
+    detailsLink: "/projects/git-workflow",
+  },
+  {
     title: "Tutorial: Next.js con IA",
     type: "Tutorial / Guía Educativa",
     description: "Guía paso a paso para configurar un proyecto Next.js moderno e integrar capacidades de Inteligencia Artificial con el Vercel AI SDK, incluyendo chat en tiempo real con streaming.",
